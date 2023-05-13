@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 13 12:51:05 2023
+Created on Thu May 11 12:52:14 2023
 
 @author: Tola Silas
 """
@@ -151,17 +151,14 @@ def barplot(data, title, ylabel, xlabel, colour):
     plt.title(title, fontweight='bold')
     plt.ylabel(ylabel)
     plt.xlabel(xlabel)
-    plt.savefig('Barplot.png')
+    plt.rcParams["figure.dpi"] = 300
+    plt.savefig("Horizontal Bar Plot.png")
     plt.show()
 
 
 # Plot bottom 10 countries with GDP/capita
 barplot(df_BtmGDPc, 'Countries With Lowest GDP/Capita (USD)',
         'Countries', 'GDP/Capita (USD)', 'green')
-
-# Plot top 10 countries with GDP/capita
-barplot(df_TopGDPc, 'Countries With Highest GDP/Capita (USD)',
-        'Countries', 'GDP/Capita (USD)', 'red')
 
 
 # Define function to plot a scatter plot
@@ -208,21 +205,21 @@ plot_scatter(data_df, 1, 0,
 print(data_df['GDP/Capital($)'].describe())
 
 # Filter the dataframe to extract the desired countries
-df_b1 = data_df[data_df.iloc[:, 1] <= 11000]  # countries below world average
+df_b1 = data_df[data_df.iloc[:, 1] <= 14616]  # countries below world average
 print(df_b1['GDP/Capital($)'].mean())
-df_b2 = data_df[(data_df.iloc[:, 1] > 11000) & (data_df.iloc[:, 1] < 40000)]
+df_b2 = data_df[(data_df.iloc[:, 1] > 14616) & (data_df.iloc[:, 1] < 40000)]
 print(df_b2)
 df_b3 = data_df[data_df.iloc[:, 1] >= 40000]
 print(df_b3)
 
 """
 Plot a scatter plot of countries with a GDP/Capital($)
-below the world average, i.e < 11,000
+below the world average, i.e < 14,616
 """
 
 # Activate scatter plot function
 plot_scatter(df_b1, 1, 0,
-             "Countries with GDP/Capital($) Below 11,000 (World Average)",
+             "Countries with GDP/Capital($) Below 14,616 (World Average)",
              "Life Expectancy(yrs)", "GDP/Capital($)")
 
 # Normalise the data
@@ -359,7 +356,7 @@ plot_clusters(df_b1, clusters, centroids)
 # distribution in each cluster
 sns.countplot(x='Clusters', data=df_b1)
 plt.savefig('Cluster distribution.png')
-plt.title('Cluster Distribution of Countries with GDP/Capital($) Below 4.56'
+plt.title('Cluster Distribution of Countries with GDP/Capital($) Below 14,616'
           ' (World Average)', fontweight='bold')
 plt.show()
 
@@ -399,7 +396,7 @@ plt.plot(x_line, y_line, '-', color='red', linewidth=2, label="Curvefit")
 plt.title('Cluster of Countries showing Prediction Line (Curvefit)',
           fontweight='bold')
 plt.xlabel('Life Expectancy(yrs)', fontsize=12)
-plt.ylabel('GDP/Capital($) (%)', fontsize=12)
+plt.ylabel('GDP/Capital(USD)', fontsize=12)
 plt.legend(loc='upper left')
 plt.annotate('y = 0.00671x + 58.308', (3000, 55), fontweight='bold')
 plt.savefig("Scatterplot Prediction Line.png")
@@ -425,7 +422,7 @@ plt.fill_between(x_line, lower, upper, alpha=0.5, color='green',
 plt.title('Cluster Showing Prediction Line (Curvefit) & Error Range',
           fontweight='bold')
 plt.xlabel('Life Expectancy(yrs)', fontsize=12)
-plt.ylabel('GDP/Capital($) (%)', fontsize=12)
+plt.ylabel('GDP/Capital(USD)', fontsize=12)
 plt.annotate(f'C.I = {ci.round(3)}', (7800, 60), fontweight='bold')
 plt.legend(loc='upper left')
 plt.rcParams["figure.dpi"] = 300
